@@ -1,0 +1,61 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+</head>
+<body> -->
+
+<!-- /* Basic and simple one */ -->
+<!-- <div id="qrcode"></div> -->
+
+<!-- <script type="text/javascript"> -->
+<!-- //   new QRCode(document.getElementById("qrcode"), "https://webisora.com"); -->
+<!-- // new QRCode(document.getElementById("qrcode"), "Ahmed");
+
+// </script>
+// </body>
+// </html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+</head>
+<body>
+    <div id="qrcode"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        // Sample data
+        var businessName = "Business Name";
+        var taxRegistrationNumber = "123456789";
+        var invoiceDate = "2024-05-20 14:30:00";
+        var invoiceTotal = "$100.00";
+        var taxTotal = "$10.00";
+    
+        // Combine the data into a single string
+        var qrData = `
+            Business Name: ${businessName}
+            Tax Registration Number: ${taxRegistrationNumber}
+            Invoice Date: ${invoiceDate}
+            Invoice Total: ${invoiceTotal}
+            Tax Total: ${taxTotal}
+        `;
+    
+        // Create the QR code
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: qrData,
+            width: 128,
+            height: 128
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Page Area Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #printableArea {
+display: none;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 0 auto;
+            width: 80%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .sect-invoice {
+            width: 23rem !important;
+            margin: auto;
+            border: 1px solid black;
+            border-radius: 6px;
+            padding: 25px 5px 0px;
+            text-align: center;
+        }
+
+        .sect-invoice .imgBox {
+            width: 200px;
+            border-radius: 5px;
+            max-height: 210px;
+            margin: 10px auto 0px !important;
+            overflow: hidden;
+            transition: all 1s;
+        }
+
+        .sect-invoice .imgBox img {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .sect-invoice .imgBox.show-img {
+            max-height: 300px;
+            margin: 10px auto;
+            border: 1px solid #d1d1d1;
+        }
+
+        @page {
+            size: 7.15in;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+
+            #printableArea {
+                width: 100%;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+
+            button {
+                display: none;
+            }
+
+            .sect-invoice {
+                width: 23rem !important;
+                margin: auto;
+                border: 1px solid black;
+                border-radius: 6px;
+                padding: 25px 5px 0px;
+                text-align: center;
+            }
+
+            .sect-invoice .imgBox {
+                width: 200px;
+                border-radius: 5px;
+                max-height: 210px;
+                margin: 10px auto 0px !important;
+                overflow: hidden;
+                transition: all 1s;
+            }
+
+            .sect-invoice .imgBox img {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .sect-invoice .imgBox.show-img {
+                max-height: 300px;
+                margin: 10px auto;
+                border: 1px solid #d1d1d1;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+
+            #printableArea{
+                display: none;
+            }
+            .sect-invoice {
+                width: 100% !important;
+            }
+
+            .sect-invoice .cont-table {
+                padding: 0px 5px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="printableArea">
+        <div class="sect-invoice">
+            <h1>This is the area to print</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+            <div class="imgBox">
+                <img src="https://www.floradoor.com/wp-content/uploads/Melody.png" alt="Example Image">
+            </div>
+        </div>
+    </div>
+    <button onclick="printDiv('printableArea')">Print</button>
+
+    <script>
+        function printDiv(divId) {
+            var divToPrint = document.getElementById(divId);
+            var newWin = window.open('', 'width=600,height=400');
+            newWin.document.open();
+            newWin.document.write('<html><head><title>Print</title>');
+            newWin.document.write('<style>');
+            newWin.document.write('body { margin: 0; padding: 0; } ');
+            newWin.document.write('@page { size: 15.15in; margin: 0; }');
+            newWin.document.write('body { margin: 0; padding: 0; background-color: #fff; } ');
+            newWin.document.write('#printableArea { width: 100%; box-shadow: none; border: none; padding: 0; } ');
+            newWin.document.write('.sect-invoice { width: 23rem !important; margin: auto; border: 1px solid black; border-radius: 6px; padding: 25px 5px 0px; text-align: center; } ');
+            newWin.document.write('.sect-invoice .imgBox { width: 200px; border-radius: 5px; max-height: 210px; margin: 10px auto 0px !important; overflow: hidden; transition: all 1s; } ');
+            newWin.document.write('.sect-invoice .imgBox img { width: 100%; padding: 10px; } ');
+            newWin.document.write('.sect-invoice .imgBox.show-img { max-height: 300px; margin: 10px auto; border: 1px solid #d1d1d1; } ');
+            newWin.document.write('</style>');
+            newWin.document.write('</head><body>');
+            newWin.document.write(divToPrint.innerHTML);
+            newWin.document.write('</body></html>');
+            newWin.document.close();
+            newWin.print();
+            newWin.close();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+    <!-- <link rel="stylesheet" href="styles.css"> Add CSS file link here -->
+</head>
+<body>
+=
+     Container for the QR code
+     <div class="qr-code-container">
+        <img id="qrCodeImage" src="" alt="QR Code">
+    </div>
+
+
+   <!-- QRCode.js -->
+   <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+   <!-- Your custom JavaScript -->
+   <!-- <script src="assets/js/main.js"></script> -->
+
+   <script>
+       // Function to generate QR code dynamically
+       window.onload = function() {
+           let qrText = JSON.stringify({
+               name: "مساند",
+               taxNumber: '2556',
+               invoiceTime: '10:50',
+               totalInvoice: '25',
+               totalTax: '55'
+           });
+
+           let qrCodeImage = document.getElementById("qrCodeImage");
+
+           // Generate QR code
+           new QRCode(qrCodeImage, {
+               text: qrText,
+               width: 150,
+               height: 150
+           });
+       };
+   </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>توليد كود QR</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@latest"></script>
+</head>
+<body>
+    <!-- مكان عرض الكود QR -->
+    <div id="qrcode"></div>
+
+    <script>
+        // يتم استدعاء دالة generateQRCode عند تحميل الصفحة
+        window.onload = function() {
+            generateQRCode();
+        };
+
+        function generateQRCode() {
+            // البيانات التي سيتم تحويلها إلى كود QR
+            var establishmentName = "اسم المنشأة التجارية";
+            var taxRegistrationNumber = "123456789";
+            var invoiceDateTime = new Date().toLocaleString('ar-EG');
+            var totalInvoiceValue = "1000.00";
+            var totalTaxValue = "150.00";
+
+            // بناء النص الكامل
+            var text = `اسم المنشأة: ${establishmentName}, الرقم الضريبي: ${taxRegistrationNumber}, وقت وتاريخ الفاتورة: ${invoiceDateTime}, القيمة الإجمالية للفاتورة: ${totalInvoiceValue}, القيمة الإجمالية للضريبة: ${totalTaxValue}`;
+
+            // إنشاء كائن لتوليد الكود QR
+            var qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: text,
+                width: 128, // عرض الكود QR
+                height: 128, // ارتفاع الكود QR
+                colorDark : "#000000", // لون البكسلات الداكنة
+                colorLight : "#ffffff", // لون البكسلات الفاتحة
+                correctLevel : QRCode.CorrectLevel.H // مستوى التصحيح (منخفض، متوسط، عالي، أعلى)
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Page Area Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #printableArea {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 0 auto;
+            width: 80%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sect-invoice {
+            width: 23rem !important;
+            margin: auto;
+            border: 1px solid black;
+            border-radius: 6px;
+            padding: 25px 5px 0px;
+            text-align: center;
+        }
+
+        .sect-invoice .imgBox {
+            width: 200px;
+            border-radius: 5px;
+            max-height: 210px;
+            margin: 10px auto 0px !important;
+            overflow: hidden;
+            transition: all 1s;
+        }
+
+        .sect-invoice .imgBox img {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .sect-invoice .imgBox.show-img {
+            max-height: 300px;
+            margin: 10px auto;
+            border: 1px solid #d1d1d1;
+        }
+
+        .sect-invoice h2,
+        .sect-invoice p,
+        .sect-invoice strong,
+        .sect-invoice span,
+        .sect-invoice small {
+            text-align: right;
+            direction: rtl;
+        }
+
+        @page {
+            size: 7.15in;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+
+            #printableArea {
+                width: 100%;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+
+            button {
+                display: none;
+            }
+
+            .sect-invoice {
+                width: 23rem !important;
+                margin: auto;
+                border: 1px solid black;
+                border-radius: 6px;
+                padding: 25px 5px 0px;
+                text-align: center;
+            }
+
+            .sect-invoice .imgBox {
+                width: 200px;
+                border-radius: 5px;
+                max-height: 210px;
+                margin: 10px auto 0px !important;
+                overflow: hidden;
+                transition: all 1s;
+            }
+
+            .sect-invoice .imgBox img {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .sect-invoice .imgBox.show-img {
+                max-height: 300px;
+                margin: 10px auto;
+                border: 1px solid #d1d1d1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sect-invoice {
+                width: 100% !important;
+            }
+
+            .sect-invoice .cont-table {
+                padding: 0px 5px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="printableArea">
+        <div class="sect-invoice">
+            <div class="w-25 mx-auto">
+                <img class="my-4" src="assets/image/1705773129ض.png" alt="">
+            </div>
+            <hr class="text-danger m-2">
+            <div>
+                <h2>المساند</h2>
+                <p>الرياض</p>
+                <div class="px-4">
+                    <div class="d-flex justify-content-between">
+                        <strong>الرقم الضريبي :</strong>
+                        <span>12563555</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <strong>جوال :</strong>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <hr class="text-danger m-2">
+            <div class="px-4">
+                <div class="d-flex justify-content-between">
+                    <strong>رقم الفاتورة :</strong>
+                    <span>inva</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <strong>تاريخ الفاتورة</strong>
+                    <span>06-05-2024</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <strong>الزبون :</strong>
+                    <span>Wallk-in</span>
+                </div>
+            </div>
+            <div class="cont-table px-4 my-3">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>وصف</th>
+                            <th>السعر</th>
+                            <th>الكمية</th>
+                            <th>الضريبة</th>
+                            <th>مجموع</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>تجربة</td>
+                            <td>g 100</td>
+                            <td>g 1</td>
+                            <td>g 0</td>
+                            <td>80.00</td>
+                        </tr>
+                        <tr>
+                            <td>تجربة</td>
+                            <td>g 100</td>
+                            <td>g 1</td>
+                            <td>g 0</td>
+                            <td>80.00</td>
+                        </tr>
+                        <tr>
+                            <td>تجربة</td>
+                            <td>g 100</td>
+                            <td>g 1</td>
+                            <td>g 0</td>
+                            <td>80.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr class="text-danger m-2">
+            <div class="px-4">
+                <div class="d-flex justify-content-between">
+                    <strong>المجموع غير شامل الضريبة :</strong>
+                    <span>0.00 <small>$</small></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <strong>ضريبة :</strong>
+                    <span>0.00 <small>$</small></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <strong>خصم :</strong>
+                    <span>0.00 <small>$</small></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <strong>المجوع شامل الضريبة :</strong>
+                    <span>0.00 <small>$</small></span>
+                </div>
+            </div>
+            <hr class="text-danger m-2">
+            <div class="d-flex flex-column">
+                <small>شكرا العمل معنا</small>
+                <small id="dateTime"></small>
+                <div>
+                    <strong>Scan QR Code</strong>
+                    <div class="qr-code">
+                        <div id="imgBox" class="imgBox">
+                            <img src="" alt="" id="qrImage">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </section>
+    <button onclick="printDiv('printableArea')">Print</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var currentDate = new Date();
+            var formattedDate = currentDate.toLocaleString();
+            document.getElementById('dateTime').innerHTML = formattedDate;
+
+            let imgBox = document.getElementById("imgBox");
+            let qrImage = document.getElementById("qrImage");
+            let qrText = {
+                name: "supports",
+                taxNumber: '2556',
+                invoiceTime: formattedDate,
+                totalInvoice: '25',
+                totalTax: '55',
+            };
+
+            qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(JSON.stringify(qrText));
+            imgBox.classList.add("show-img");
+        });
+
+        function printDiv(divId) {
+            var divToPrint = document.getElementById(divId);
+            var newWin = window.open('', 'width=600,height=400');
+            newWin.document.open();
+            newWin.document.write('<html><head><title>Print</title>');
+            newWin.document.write('<style>');
+            newWin.document.write('body { margin: 0; padding: 0; } ');
+            newWin.document.write('@page { size: 7.15in; margin: 0; }');
+            newWin.document.write('body { margin: 0; padding: 0; background-color: #fff; } ');
+            newWin.document.write('#printableArea { width: 100%; box-shadow: none; border: none; padding: 0; } ');
+            newWin.document.write('.sect-invoice { width: 23rem !important; margin: auto; border: 1px solid black; border-radius: 6px; padding: 25px 5px 0px; text-align: center; } ');
+            newWin.document.write('.sect-invoice .imgBox { width: 200px; border-radius: 5px; max-height: 210px; margin: 10px auto 0px !important; overflow: hidden; transition: all 1s; } ');
+            newWin.document.write('.sect-invoice .imgBox img { width: 100%; padding: 10px; } ');
+            newWin.document.write('.sect-invoice .imgBox.show-img { max-height: 300px; margin: 10px auto; border: 1px solid #d1d1d1; } ');
+            newWin.document.write('.sect-invoice h2, .sect-invoice p, .sect-invoice strong, .sect-invoice span, .sect-invoice small { text-align: right; direction: rtl; } ');
+            newWin.document.write('</style>');
+            newWin.document.write('</head><body>');
+            newWin.document.write(divToPrint.innerHTML);
+            newWin.document.write('</body></html>');
+            newWin.document.close();
+            newWin.print();
+            newWin.close();
+        }
+    </script>
+</body>
+</html>
