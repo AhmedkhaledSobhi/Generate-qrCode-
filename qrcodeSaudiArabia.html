@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate QR Code</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+    <div>
+        <canvas id="qrcode"></canvas>
+    </div>
+    <script>
+        // Helper function to encode data in TLV format
+        function toTLV(tag, value) {
+            const length = value.length;
+            return String.fromCharCode(tag) + String.fromCharCode(length) + value;
+        }
+
+        // Input data
+        const sellerName = "Store Name"; // اسم المتجر
+        const taxNumber = "123456789012345"; // الرقم الضريبي
+        const invoiceDate = "2023-05-20T15:30:00Z"; // تاريخ الفاتورة
+        const totalWithTax = "150.00"; // إجمالي الفاتورة مع الضريبة
+        const taxAmount = "15.00"; // إجمالي الضريبة
+
+        // Encode data to TLV format
+        const tlvData = 
+            toTLV(1, sellerName) +
+            toTLV(2, taxNumber) +
+            toTLV(3, invoiceDate) +
+            toTLV(4, totalWithTax) +
+            toTLV(5, taxAmount);
+
+        // Convert TLV data to base64
+        const base64Data = btoa(tlvData);
+
+        // Generate QR code
+        const canvas = document.getElementById('qrcode');
+        QRCode.toCanvas(canvas, base64Data, function (error) {
+            if (error) console.error(error);
+            console.log('QR code generated!');
+        });
+    </script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Qrcode without regular encryption  ( َQrcode بدون تشفير العادي ) </title>
     <style>
         body {
             background-color: black;
@@ -70,8 +70,8 @@
 <body>
 
     <div class="container">
-        <!-- <p>ENter your text or url</p>
-        <input type="text" name="" id="qrText"> -->
+        <p>ENter your text or url</p>
+        <input type="text" name="" id="qrText">
 
         <div class="imgBox">
             <img src="" alt="" id="qrImage">
@@ -88,7 +88,7 @@
 
         let imgBox = document.getElementById("imgBox");
         let qrImage = document.getElementById("qrImage");
-        // let qrText = document.getElementById('qrText');
+        let qrText = document.getElementById('qrText').value;
 
 
         var businessName = "Business Name";
@@ -97,18 +97,19 @@
         var invoiceTotal = "$100.00";
         var taxTotal = "$10.00";
 
-        var qrText = `
-            Business Name: ${businessName}
-            Tax Registration Number: ${taxRegistrationNumber}
-            Invoice Date: ${invoiceDate}
-            Invoice Total: ${invoiceTotal}
-            Tax Total: ${taxTotal}
-        `;
+        // var qrText = `
+        //     Business Name: ${businessName}
+        //     Tax Registration Number: ${taxRegistrationNumber}
+        //     Invoice Date: ${invoiceDate}
+        //     Invoice Total: ${invoiceTotal}
+        //     Tax Total: ${taxTotal}
+        // `;
         function genrateQr() {
             qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrText;
             imgBox.classList.add("show-img")
         }
     </script>
+
 </body>
 
 </html>
