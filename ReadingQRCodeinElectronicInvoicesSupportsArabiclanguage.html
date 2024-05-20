@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate QR Code</title>
+
+    <style>
+        body {
+            background-color: black;
+        }
+
+        .container {
+            width: 250px;
+            padding: 25px 35px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        .container input {
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid #494eea;
+            outline: 0;
+            padding: 10px;
+            margin: 10px auto;
+            border-radius: 5px;
+        }
+
+        .container button {
+            width: 100%;
+            height: 50px;
+            background: #494eea;
+            color: #fff;
+            border: 0;
+            outline: 0;
+            border-radius: 5px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+   
+    <div class="container">
+        <label for="sellerName">Enter Store Name (Arabic or English):</label>
+        <input type="text" id="sellerName" placeholder="اسم المتجر / Store Name">
+        <button onclick="generateQRCode()">Generate QR Code</button>
+       
+        <div>
+            <canvas id="qrcode"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // ---------- يدعم اللغه العربيةو الانجليزية --------------------------
+       
+        // Helper function to encode data in TLV format
+        function toTLV(tag, value) {
+            const encodedValue = new TextEncoder().encode(value);
+            const length = encodedValue.length;
+            const result = new Uint8Array(2 + length);
+            result[0] = tag;
+            result[1] = length;
+            result.set(encodedValue, 2);
+            return result;
+        }
+
+        // Helper function to convert Uint8Array to Base64
+        function uint8ToBase64(uint8) {
+            return btoa(String.fromCharCode.apply(null, uint8));
+        }
+
+        // Function to validate if the name contains only Arabic or English characters
+        function isValidName(name) {
+            const arabicRegex = /^[\u0600-\u06FF\s]+$/;
+            const englishRegex = /^[A-Za-z\s]+$/;
+            return arabicRegex.test(name) || englishRegex.test(name);
+        }
+
+        // Function to generate the QR code
+        function generateQRCode() {
+            const sellerName = document.getElementById('sellerName').value;
+
+            if (!isValidName(sellerName)) {
+                alert('Please enter the store name in Arabic or English only.');
+                return;
+            }
+
+            const taxNumber = "123456789012345"; // Tax Number
+            const invoiceDate = "2023-05-20T15:30:00Z"; // Invoice Date
+            const totalWithTax = "150.00"; // Total with Tax
+            const taxAmount = "15.00"; // Tax Amount
+
+            // Encode data to TLV format
+            const tlvData = new Uint8Array([
+                ...toTLV(1, sellerName),
+                ...toTLV(2, taxNumber),
+                ...toTLV(3, invoiceDate),
+                ...toTLV(4, totalWithTax),
+                ...toTLV(5, taxAmount)
+            ]);
+
+            // Convert TLV data to base64
+            const base64Data = uint8ToBase64(tlvData);
+
+            // Generate QR code
+            const canvas = document.getElementById('qrcode');
+            QRCode.toCanvas(canvas, base64Data, { errorCorrectionLevel: 'H' }, function (error) {
+                if (error) console.error(error);
+                console.log('QR code generated!');
+            });
+        }
+    </script>
+
+</body>
+</html>
